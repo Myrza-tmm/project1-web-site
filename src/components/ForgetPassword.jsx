@@ -231,34 +231,7 @@ export default function ForgetPassword({
             boxShadow: '0 8px 20px rgba(168,17,218,0.2)',
           }}
         >
-          Код алу →
-        </button>
-
-        {/* КОДТЫ ҚАЙТА СҰРАУ БАТЫРМАСЫ */}
-
-        <button
-          onClick={handleResendCode}
-          disabled={!isPhoneValid || seconds > 0}
-          style={{
-            width: '100%',
-            padding: 17,
-            marginTop: 14,
-            border: '1px solid #D9D9DE',
-            borderRadius: 16,
-            backgroundColor: '#E8E8EC',
-            color: '#55515C',
-            fontSize: 16,
-            fontWeight: 700,
-            cursor:
-              !isPhoneValid || seconds > 0
-                ? 'not-allowed'
-                : 'pointer',
-            opacity: !isPhoneValid || seconds > 0 ? 0.7 : 1,
-          }}
-        >
-          {seconds > 0
-            ? `Кодты қайта сұрау (${seconds} сек.)`
-            : '↻ Кодты қайта сұрау'}
+          Алға →
         </button>
 
         {/* ХАБАРЛАМА */}
