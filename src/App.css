@@ -1,0 +1,233 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #ffffff;
+}
+
+button,
+input {
+  font-family: inherit;
+}
+
+.app {
+  min-height: 100vh;
+  background-color: #ffffff;
+}
+
+.container {
+  width: 100%;
+  max-width: 500px;
+  min-height: 100vh;
+
+  margin: 0 auto;
+  padding: 30px 28px;
+
+  background-color: #ffffff;
+}
+
+/* Кнопка назад */
+
+.back-button {
+  width: 44px;
+  height: 44px;
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  border: none;
+  background: transparent;
+
+  color: #1b1923;
+  font-size: 32px;
+  font-weight: 300;
+
+  cursor: pointer;
+
+  margin-bottom: 24px;
+}
+
+.back-button:hover {
+  opacity: 0.7;
+}
+
+/* Заголовок */
+
+.title {
+  margin: 0;
+
+  color: #1b1923;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+/* Подзаголовок */
+
+.subtitle {
+  margin: 8px 0 18px;
+
+  color: #aaa9b2;
+  font-size: 18px;
+}
+
+/* Input */
+
+.input-container {
+  width: 100%;
+  height: 62px;
+
+  display: flex;
+  align-items: center;
+
+  background-color: #f8f8fa;
+  border-radius: 18px;
+
+  padding: 0 18px;
+  margin-top: 10px;
+}
+
+.input-icon {
+  font-size: 18px;
+  margin-right: 14px;
+}
+
+.input-container input {
+  flex: 1;
+
+  width: 100%;
+  height: 100%;
+
+  border: none;
+  outline: none;
+
+  background: transparent;
+
+  color: #1b1923;
+  font-size: 18px;
+}
+
+.input-container input::placeholder {
+  color: #aaa9b2;
+}
+
+/* Забыл пароль */
+
+.forgot-wrapper {
+  display: flex;
+  justify-content: flex-end;
+
+  margin-top: 10px;
+}
+
+.forgot-button {
+  border: none;
+  background: transparent;
+
+  color: #da1111;
+  font-size: 16px;
+
+  cursor: pointer;
+
+  padding: 0;
+}
+
+.forgot-button:hover {
+  opacity: 0.75;
+}
+
+/* Кнопка входа */
+
+.login-button {
+  width: 100%;
+  height: 60px;
+
+  margin-top: 25px;
+
+  border: none;
+  border-radius: 18px;
+
+  background-color: #da1111;
+
+  color: #ffffff;
+
+  font-size: 19px;
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+.login-button:hover {
+  background-color: #da1111;
+}
+
+.login-button:active {
+  transform: scale(0.99);
+}
+
+/* Регистрация */
+
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin-top: 22px;
+
+  flex-wrap: wrap;
+}
+
+.register-text {
+  color: #9ca3af;
+  font-size: 16px;
+}
+
+.register-link {
+  border: none;
+  background: transparent;
+
+  color: #da1111;
+
+  font-size: 16px;
+  font-weight: 600;
+
+  margin-left: 5px;
+
+  cursor: pointer;
+
+  padding: 0;
+}
+
+.register-link:hover {
+  text-decoration: underline;
+}
+
+/* Mobile */
+
+@media (max-width: 500px) {
+  .container {
+    padding: 20px 20px;
+  }
+
+  .title {
+    font-size: 26px;
+  }
+
+  .subtitle {
+    font-size: 17px;
+  }
+
+  .input-container {
+    height: 58px;
+    border-radius: 16px;
+  }
+
+  .login-button {
+    height: 58px;
+    border-radius: 16px;
+  }
+}
