@@ -1,14 +1,13 @@
-
 import React, { useState } from 'react';
 
 export default function Register({ onBack, onContinue }) {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('+7 ');
   const [password, setPassword] = useState('');
+  const [group, setGroup] = useState('');
   const [isAgreed, setIsAgreed] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
-  // Телефон нөмірін форматтау
   const formatPhone = (value) => {
     let digits = value.replace(/\D/g, '');
 
@@ -52,13 +51,19 @@ export default function Register({ onBack, onContinue }) {
 
   const canContinue =
     name.trim().length > 0 &&
+    group.trim().length > 0 &&
     isPhoneValid &&
     isPasswordValid &&
     isAgreed;
 
-  const handleContinue = () => {
+  const handleContinue = async () => {
     if (!name.trim()) {
       alert('Атыңызды енгізіңіз!');
+      return;
+    }
+
+    if (!group.trim()) {
+      alert('Тобыңызды енгізіңіз!');
       return;
     }
 
@@ -77,8 +82,21 @@ export default function Register({ onBack, onContinue }) {
       return;
     }
 
-    onContinue();
+        try {
+      const res = await fetch('http://localhost:3000/api/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, phone, password, group }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error);
+      alert('Тіркелдіңіз! Базаға түсті ✅');
+      onContinue();
+    } catch (e) {
+      alert('Қате: ' + e.message);
+    }
   };
+  
 
   const inputContainer = {
     width: '100%',
@@ -266,6 +284,18 @@ export default function Register({ onBack, onContinue }) {
                 value={phone}
                 onChange={(e) => setPhone(formatPhone(e.target.value))}
                 placeholder="+7 (___) ___-__-__"
+              />
+            </div>
+
+            <div style={inputContainer}>
+              <span style={{ fontSize: 22 }}>🎓</span>
+
+              <input
+                style={inputStyle}
+                type="text"
+                value={group}
+                onChange={(e) => setGroup(e.target.value)}
+                placeholder="Тобыңызды енгізіңіз, мысалы: IS-25-4K"
               />
             </div>
 

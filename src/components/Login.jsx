@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 
 export default function Login({
@@ -49,6 +48,32 @@ export default function Login({
 
   const canContinue =
     isPhoneValid && password.length > 0;
+
+  const handleLogin = async () => {
+    if (!isPhoneValid) {
+      alert('Телефон нөмірін дұрыс енгізіңіз!');
+      return;
+    }
+    if (!password) {
+      alert('Құпиясөзді енгізіңіз!');
+      return;
+    }
+
+    try {
+      const res = await fetch('http://localhost:3000/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ phone, password }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error);
+      localStorage.setItem('user', JSON.stringify(data.user));
+      alert('Қош келдіңіз! ✅');
+      onContinue(data.user);
+    } catch (e) {
+      alert(e.message);
+    }
+  };
 
   return (
     <div style={{
@@ -201,7 +226,7 @@ export default function Login({
                 type={showPassword ? 'text' : 'password'}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="Құпиясөзіңізді енгізіңіз"
+                placeholder="Құпиясөзді енгізіңіз"
                 style={fieldStyle}
               />
 
@@ -239,7 +264,7 @@ export default function Login({
             {/* КІРУ */}
 
             <button
-              onClick={onContinue}
+              onClick={handleLogin}
               disabled={!canContinue}
               style={{
                 width: '100%',

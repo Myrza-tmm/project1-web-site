@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 
 import ForgetPassword from './components/ForgetPassword';
@@ -13,6 +12,13 @@ import Services from './components/Services';
 
 export default function App() {
   const [page, setPage] = useState('login');
+  const [user, setUser] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem('user'));
+    } catch {
+      return null;
+    }
+  });
 
   // LOGIN
   if (page === 'login') {
@@ -21,7 +27,10 @@ export default function App() {
         onBack={() => setPage('login')}
         onForgetPassword={() => setPage('forget')}
         onRegister={() => setPage('registration')}
-        onContinue={() => setPage('mainpage')}
+        onContinue={(loggedUser) => {
+          setUser(loggedUser);
+          setPage('mainpage');
+        }}
       />
     );
   }
@@ -62,8 +71,13 @@ export default function App() {
   if (page === 'profile') {
     return (
       <ProfilePage
+        user={user}
         onBack={() => setPage('mainpage')}
-        onLogout={() => setPage('login')}
+        onLogout={() => {
+          setUser(null);
+          localStorage.removeItem('user');
+          setPage('login');
+        }}
       />
     );
   }

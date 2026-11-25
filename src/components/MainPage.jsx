@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 export default function MainPage({
@@ -7,6 +6,9 @@ export default function MainPage({
   onProfile,
   onServices,
 }) {
+  // Кірген адамды оқу
+  const user = JSON.parse(localStorage.getItem('user') || 'null');
+
   return (
     <div style={{
       minHeight: '100vh',
@@ -41,7 +43,7 @@ export default function MainPage({
             fontWeight: 800,
             margin: 0,
           }}>
-            Tursynbek M
+            {user ? user.name : 'Қонақ'}
           </h1>
 
           <p style={{

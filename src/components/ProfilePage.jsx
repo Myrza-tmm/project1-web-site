@@ -1,7 +1,14 @@
-
 import React from 'react';
 
 export default function Profile({ onBack, onLogout }) {
+  // Кірген адамды оқу
+  const user = JSON.parse(localStorage.getItem('user') || 'null');
+
+  const handleLogout = () => {
+    localStorage.removeItem('user');
+    onLogout();
+  };
+
   const menuItemStyle = {
     display: 'flex',
     alignItems: 'center',
@@ -95,8 +102,10 @@ export default function Profile({ onBack, onLogout }) {
               justifyContent: 'center',
               alignItems: 'center',
               fontSize: 45,
+              fontWeight: 800,
+              color: '#A811DA',
             }}>
-              👤
+              {user?.name ? user.name[0].toUpperCase() : '👤'}
             </div>
 
             <h2 style={{
@@ -105,7 +114,7 @@ export default function Profile({ onBack, onLogout }) {
               fontWeight: 800,
               margin: '15px 0 5px',
             }}>
-              Tursynbek M
+              {user ? user.name : 'Қонақ'}
             </h2>
 
             <p style={{
@@ -114,7 +123,16 @@ export default function Profile({ onBack, onLogout }) {
               fontSize: 15,
               margin: 0,
             }}>
-              Group IS-25-4K
+              {user?.group || 'Group IS-25-4K'}
+            </p>
+
+            <p style={{
+              color: '#FFFFFF',
+              opacity: 0.85,
+              fontSize: 14,
+              margin: '6px 0 0',
+            }}>
+              {user?.phone || ''}
             </p>
 
             <div style={{
@@ -160,7 +178,7 @@ export default function Profile({ onBack, onLogout }) {
                   color: '#99939F',
                   marginTop: 4,
                 }}>
-                  Профиль мәліметтері
+                  {user ? `${user.name} • ${user.phone}` : 'Профиль мәліметтері'}
                 </div>
               </div>
               <span style={{ color: '#A811DA', fontSize: 22 }}>
@@ -233,7 +251,7 @@ export default function Profile({ onBack, onLogout }) {
           {/* ШЫҒУ */}
 
           <button
-            onClick={onLogout}
+            onClick={handleLogout}
             style={{
               width: '100%',
               padding: 17,
